@@ -1,4 +1,4 @@
-package cn.willian.netty.rpc;
+package cn.willian.netty.rpc.spring.reference;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -22,12 +22,12 @@ import io.netty.util.concurrent.DefaultPromise;
  */
 public class RpcClientInvokeHandler implements InvocationHandler {
 
-    private final String host;
-    private final Integer port;
+    private final String serviceAddress;
+    private final Integer servicePort;
 
-    public RpcClientInvokeHandler(String host, Integer port) {
-        this.host = host;
-        this.port = port;
+    public RpcClientInvokeHandler(String serviceAddress, Integer servicePort) {
+        this.serviceAddress = serviceAddress;
+        this.servicePort = servicePort;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class RpcClientInvokeHandler implements InvocationHandler {
         rpcProtocol.setHeader(rpcHeader);
         rpcProtocol.setBody(rpcRequest);
 
-        RpcNettyClient rpcNettyClient = new RpcNettyClient(host, port);
+        RpcNettyClient rpcNettyClient = new RpcNettyClient(serviceAddress, servicePort);
         rpcNettyClient.sendRequest(rpcProtocol);
 
         RpcFuture<RpcResponse> rpcFuture = new RpcFuture<>(new DefaultPromise<>(new DefaultEventLoop()));

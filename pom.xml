@@ -25,6 +25,7 @@
         <lombok.version>1.18.34</lombok.version>
         <guava.version>33.3.0-jre</guava.version>
         <fastjson.version>2.0.52</fastjson.version>
+        <commons-lang3.version>3.17.0</commons-lang3.version>
     </properties>
 
     <dependencies>
@@ -42,6 +43,11 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
         </dependency>
     </dependencies>
 

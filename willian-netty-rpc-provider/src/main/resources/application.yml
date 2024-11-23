@@ -3,3 +3,7 @@ server:
 spring:
   application:
     name: netty-rpc-provider
+willian:
+  rpc:
+    service:
+      server-port: 8989

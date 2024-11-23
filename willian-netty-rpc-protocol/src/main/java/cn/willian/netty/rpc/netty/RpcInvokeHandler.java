@@ -1,14 +1,11 @@
 package cn.willian.netty.rpc.netty;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import cn.willian.netty.rpc.constants.RequestTypeEnum;
 import cn.willian.netty.rpc.protocol.RpcHeader;
 import cn.willian.netty.rpc.protocol.RpcProtocol;
 import cn.willian.netty.rpc.protocol.RpcRequest;
 import cn.willian.netty.rpc.protocol.RpcResponse;
-import cn.willian.netty.rpc.spring.SpringBeanManager;
+import cn.willian.netty.rpc.spring.bean.RpcMediator;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
@@ -27,31 +24,11 @@ public class RpcInvokeHandler extends SimpleChannelInboundHandler<RpcProtocol<Rp
         RpcProtocol<RpcResponse> response = new RpcProtocol<>();
         response.setHeader(header);
         // 执行调用
-        Object result = this.invoke(msg.getBody());
+        Object result = RpcMediator.getInstance().invoke(msg.getBody());
         RpcResponse rpcResponse = new RpcResponse();
         rpcResponse.setResult(result);
         rpcResponse.setMessage("success");
         response.setBody(rpcResponse);
         ctx.writeAndFlush(response);
-    }
-
-    private Object invoke(RpcRequest body) {
-
-        // 加载这个类
-        String className = body.getClassName();
-        try {
-            Class<?> targetClazz = Class.forName(className);
-            Method targetMethod = targetClazz.getDeclaredMethod(body.getMethodName(), body.getMethodTypes());
-            Object service = SpringBeanManager.getBean(targetClazz);
-            return targetMethod.invoke(service, body.getMethodArgs());
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

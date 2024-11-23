@@ -6,15 +6,14 @@ import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author <a href="mailto:willian.wyann@gmail.com">willian</a>
- * @since 2024-11-22 22:03:23
+ * @since 2024-11-22 22:36:07
  */
-@ComponentScan(basePackages = {"cn.willian.netty.rpc.service", "cn.willian.netty.rpc.spring.annotation",
-    "cn.willian.netty.rpc.spring.service"})
+@ComponentScan(basePackages = {"cn.willian.netty.rpc.controller", "cn.willian.netty.rpc.spring.annotation",
+    "cn.willian.netty.rpc.spring.reference"})
 @SpringBootApplication
-public class RpcProviderApplication {
+public class RpcConsumerApplication {
 
     public static void main(String[] args) {
-
-        SpringApplication.run(RpcProviderApplication.class, args);
+        SpringApplication.run(RpcConsumerApplication.class, args);
     }
 }
