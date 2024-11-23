@@ -3,7 +3,6 @@ package cn.willian.netty.rpc.service;
 import cn.willian.netty.rpc.api.IUserService;
 import cn.willian.netty.rpc.spring.annotation.RpcService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author <a href="mailto:willian.wyann@gmail.com">willian</a>
@@ -11,7 +10,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Slf4j
 @RpcService
-@ConfigurationProperties
 public class UserServiceImpl implements IUserService {
 
     @Override

@@ -13,6 +13,7 @@
         <module>willian-netty-rpc-consumer</module>
         <module>willian-netty-rpc-provider</module>
         <module>willian-netty-rpc-protocol</module>
+        <module>willian-netty-rpc-registry</module>
     </modules>
 
     <properties>
@@ -79,6 +80,11 @@
                 <groupId>cn.willian.netty.rpc</groupId>
                 <artifactId>willian-netty-rpc-protocol</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.willian.netty.rpc</groupId>
+                <artifactId>willian-netty-rpc-registry</artifactId>
+                <version>1.0-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

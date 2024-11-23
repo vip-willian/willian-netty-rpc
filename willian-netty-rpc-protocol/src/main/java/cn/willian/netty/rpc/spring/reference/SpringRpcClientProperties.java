@@ -12,6 +12,6 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "willian.rpc.client")
 public class SpringRpcClientProperties {
 
-    private String serviceAddress;
-    private Integer servicePort;
+    private String registryAddress;
+    private byte registryType;
 }

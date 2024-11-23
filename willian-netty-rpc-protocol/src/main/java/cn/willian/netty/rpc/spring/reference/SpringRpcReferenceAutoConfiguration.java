@@ -27,9 +27,9 @@ public class SpringRpcReferenceAutoConfiguration implements EnvironmentAware {
     public SpringRpcReferencePostProcessor springRpcReferencePostProcessor() {
 
         SpringRpcClientProperties properties = new SpringRpcClientProperties();
-        properties.setServiceAddress(environment.getProperty("willian.rpc.client.service-address"));
-        properties.setServicePort(
-            Integer.parseInt(Objects.requireNonNull(environment.getProperty("willian.rpc.client.service-port"))));
+        properties.setRegistryAddress(environment.getProperty("willian.rpc.client.registry-address"));
+        properties.setRegistryType(
+            Byte.parseByte(Objects.requireNonNull(environment.getProperty("willian.rpc.client.registry-type"))));
         return new SpringRpcReferencePostProcessor(properties);
     }
 }

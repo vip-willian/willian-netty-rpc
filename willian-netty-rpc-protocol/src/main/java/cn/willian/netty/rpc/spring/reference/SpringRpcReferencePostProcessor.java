@@ -79,8 +79,8 @@ public class SpringRpcReferencePostProcessor
             BeanDefinitionBuilder beanDefinitionBuilder =
                 BeanDefinitionBuilder.genericBeanDefinition(SpringRpcReferenceBean.class);
             beanDefinitionBuilder.setInitMethodName("init");
-            beanDefinitionBuilder.addPropertyValue("serviceAddress", properties.getServiceAddress());
-            beanDefinitionBuilder.addPropertyValue("servicePort", properties.getServicePort());
+            beanDefinitionBuilder.addPropertyValue("registryAddress", properties.getRegistryAddress());
+            beanDefinitionBuilder.addPropertyValue("registryType", properties.getRegistryType());
             beanDefinitionBuilder.addPropertyValue("serviceInterface", field.getType());
             rpcServiceBeanDefinitionMap.put(field.getName(), beanDefinitionBuilder.getBeanDefinition());
         }

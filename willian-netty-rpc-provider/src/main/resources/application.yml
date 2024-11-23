@@ -7,3 +7,5 @@ willian:
   rpc:
     service:
       server-port: 8989
+      registry-address: 192.168.31.136:2181,192.168.31.136:2182,192.168.31.136:2183
+      registry-type: 0

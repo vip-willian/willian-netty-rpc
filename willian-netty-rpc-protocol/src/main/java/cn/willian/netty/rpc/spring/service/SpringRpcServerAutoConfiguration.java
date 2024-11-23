@@ -15,6 +15,6 @@ public class SpringRpcServerAutoConfiguration {
     @Bean
     public SpringRpcProviderBean springRpcProviderBean(SpringRpcServerProperties properties) {
 
-        return new SpringRpcProviderBean(properties.getServerAddress(), properties.getServerPort());
+        return new SpringRpcProviderBean(properties);
     }
 }

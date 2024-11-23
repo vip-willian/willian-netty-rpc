@@ -4,6 +4,10 @@ import java.lang.reflect.Proxy;
 
 import org.springframework.beans.factory.FactoryBean;
 
+import cn.willian.netty.rpc.IRegistryService;
+import cn.willian.netty.rpc.bean.ServiceInfo;
+import cn.willian.netty.rpc.registry.ServiceRegistryFactory;
+
 /**
  * @author <a href="mailto:willian.wyann@gmail.com">willian</a>
  * @since 2024-11-23 11:17:34
@@ -11,13 +15,17 @@ import org.springframework.beans.factory.FactoryBean;
 public class SpringRpcReferenceBean implements FactoryBean<Object> {
 
     private Object bean;
-    private String serviceAddress;
-    private Integer servicePort;
     private Class<?> serviceInterface;
+    private String registryAddress;
+    private byte registryType;
 
-    public void init() {
+    public void init() throws Exception {
+
+        IRegistryService registryService = ServiceRegistryFactory.get(registryType, registryAddress);
+        // 服务发现
+        ServiceInfo serviceInfo = registryService.discovery(serviceInterface.getName());
         this.bean = Proxy.newProxyInstance(serviceInterface.getClassLoader(), new Class[] {serviceInterface},
-            new RpcClientInvokeHandler(serviceAddress, servicePort));
+            new RpcClientInvokeHandler(serviceInfo.getServiceAddress(), serviceInfo.getServicePort()));
     }
 
     @Override
@@ -30,12 +38,12 @@ public class SpringRpcReferenceBean implements FactoryBean<Object> {
         return serviceInterface;
     }
 
-    public void setServiceAddress(String serviceAddress) {
-        this.serviceAddress = serviceAddress;
+    public void setRegistryAddress(String registryAddress) {
+        this.registryAddress = registryAddress;
     }
 
-    public void setServicePort(Integer servicePort) {
-        this.servicePort = servicePort;
+    public void setRegistryType(byte registryType) {
+        this.registryType = registryType;
     }
 
     public void setServiceInterface(Class<?> serviceInterface) {
